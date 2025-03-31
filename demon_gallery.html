@@ -1,0 +1,156 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Image Gallery</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            background-color: #121212; /* 深色背景 */-->
+<!--            overflow: hidden; /* 防止滚动条出现 */-->
+<!--            position: relative; /* 设置为相对定位，方便子元素绝对定位 */-->
+<!--        }-->
+<!--        .image-container {-->
+<!--            position: absolute;-->
+<!--            border-radius: 4px;-->
+<!--            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);-->
+<!--            transition: transform 0.5s ease; /* 添加简单的动画效果 */-->
+<!--        }-->
+<!--        img {-->
+<!--            max-width: 100%;-->
+<!--            height: auto;-->
+<!--            border-radius: 4px;-->
+<!--            border: none; /* 去掉白色边框 */-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <script>-->
+<!--        // 图片路径数组-->
+<!--        const imagePaths = [-->
+<!--            "./images/demon_logo_0.png",-->
+<!--            "./images/demon_logo_1.png",-->
+<!--            "./images/demon_logo_2.png",-->
+<!--            "./images/demon_logo_3.png",-->
+<!--            "./images/demon_logo_4.png",-->
+<!--            "./images/demon_logo_5.png"-->
+<!--        ];-->
+
+<!--        // 创建多个图片容器-->
+<!--        const totalImages = 40; // 总共生成的图片数量-->
+<!--        const container = document.body;-->
+
+<!--        for (let i = 0; i < totalImages; i++) {-->
+<!--            const imgContainer = document.createElement("div");-->
+<!--            imgContainer.classList.add("image-container");-->
+
+<!--            const img = document.createElement("img");-->
+<!--            img.src = imagePaths[Math.floor(Math.random() * imagePaths.length)]; // 随机选择图片-->
+<!--            img.alt = `Image ${i}`;-->
+
+<!--            // 随机设置图片大小-->
+<!--            const randomSize = Math.random() * 150 + 50; // 随机大小范围：50px 到 150px-->
+<!--            img.style.width = `${randomSize}px`;-->
+
+<!--            // 随机设置图片位置-->
+<!--            let randomX, randomY;-->
+<!--            let isOverlapping;-->
+<!--            do {-->
+<!--                randomX = Math.random() * (window.innerWidth - randomSize);-->
+<!--                randomY = Math.random() * (window.innerHeight - randomSize);-->
+<!--                imgContainer.style.left = `${randomX}px`;-->
+<!--                imgContainer.style.top = `${randomY}px`;-->
+
+<!--                isOverlapping = checkOverlap(imgContainer);-->
+<!--            } while (isOverlapping); // 检测是否重叠-->
+
+<!--            imgContainer.appendChild(img);-->
+<!--            container.appendChild(imgContainer);-->
+<!--        }-->
+
+<!--        // 检测图片是否重叠的函数-->
+<!--        function checkOverlap(newElement) {-->
+<!--            const newRect = newElement.getBoundingClientRect();-->
+<!--            const allElements = document.querySelectorAll('.image-container');-->
+<!--            for (let el of allElements) {-->
+<!--                if (el !== newElement) {-->
+<!--                    const otherRect = el.getBoundingClientRect();-->
+<!--                    if (!(-->
+<!--                        newRect.right < otherRect.left ||-->
+<!--                        newRect.left > otherRect.right ||-->
+<!--                        newRect.bottom < otherRect.top ||-->
+<!--                        newRect.top > otherRect.bottom-->
+<!--                    )) {-->
+<!--                        return true; // 发生重叠-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--            return false; // 没有重叠-->
+<!--        }-->
+<!--    </script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Image Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* 深色背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 使用视口高度确保页面充满屏幕 */
+            overflow: hidden; /* 防止滚动条出现 */
+        }
+        .image-container {
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease; /* 添加简单的动画效果 */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: none; /* 去掉白色边框 */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container" id="image-container"></div>
+
+    <script>
+        // 图片路径数组
+        const imagePaths = [
+            "./images/demon_logo_0.png",
+            "./images/demon_logo_1.png",
+            "./images/demon_logo_2.png",
+            "./images/demon_logo_3.png",
+            "./images/demon_logo_4.png",
+            "./images/demon_logo_5.png"
+        ];
+
+        // 随机选择一张图片
+        const randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
+
+        // 创建图片元素
+        const img = document.createElement("img");
+        img.src = randomImagePath;
+        img.alt = "Random Image";
+
+        // 将图片添加到容器中
+        const container = document.getElementById("image-container");
+        container.appendChild(img);
+    </script>
+</body>
+</html>
